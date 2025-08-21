@@ -1,0 +1,11 @@
+{% for flower in flowers %}
+<div class="flower" style="border: 1px solid #eee; padding: 15px; margin: 10px; border-radius: 8px;">
+    <h3>{{ flower.name }}</h3>
+    <img src="{{ flower.image.url }}" alt="{{ flower.name }}" width="200">
+    <p>Цена: {{ flower.price }} руб.</p>
+    <p>{{ flower.description }}</p>
+    <a href="{% url 'add_to_cart' flower.id %}" style="background: #007bff; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px;">
+        Добавить в корзину
+    </a>
+</div>
+{% endfor %}

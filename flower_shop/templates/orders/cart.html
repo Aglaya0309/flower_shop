@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>🛒 Корзина</h1>
+
+{% if order and order.orderitem_set.all %}
+    {% for item in order.orderitem_set.all %}
+    <div class="cart-item" style="border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 8px;">
+        <h3>{{ item.flower.name }}</h3>
+        <img src="{{ item.flower.image.url }}" alt="{{ item.flower.name }}" width="100">
+        <p>Цена за шт: {{ item.flower.price }} руб.</p>
+        <p>Количество: {{ item.quantity }}</p>
+        <p><strong>Стоимость: {{ item.get_total_price }} руб.</strong></p>
+    </div>
+    {% endfor %}
+    
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+        <h3>Общая сумма: {{ order.get_total_cost }} руб.</h3>
+        <button style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+            Оформить заказ
+        </button>
+    </div>
+{% else %}
+    <p>Ваша корзина пуста</p>
+    <a href="{% url 'catalog' %}">Вернуться к каталогу</a>
+{% endif %}
+{% endblock %}

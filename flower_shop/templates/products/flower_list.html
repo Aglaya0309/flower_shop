@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Наш каталог цветов</h1>
+<div class="flowers">
+    {% for flower in flowers %}
+    <div class="flower">
+        <h3>{{ flower.name }}</h3>
+        {% if flower.image %}
+        <img src="{{ flower.image.url }}" alt="{{ flower.name }}">
+        {% endif %}
+        <p class="price">Цена: {{ flower.price }} руб.</p>
+        <p>{{ flower.description }}</p>
+        <a href="{% url 'add_to_cart' flower.id %}" class="btn">
+            🛒 Добавить в корзину
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
